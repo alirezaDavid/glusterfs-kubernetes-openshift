@@ -22,3 +22,5 @@ spec:
     - name: brickpath
       hostPath:
         path: "/mnt/brick1"
+  nodeSelector:
+    type: master
