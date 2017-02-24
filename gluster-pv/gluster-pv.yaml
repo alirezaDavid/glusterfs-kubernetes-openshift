@@ -9,6 +9,6 @@ spec:
   - "ReadWriteMany"
   glusterfs:
     endpoints: "glusterfs-cluster"
-    path: "uploads_static"
+    path: "static_upload"
     readOnly: false
   persistentVolumeReclaimPolicy: "Retain"
