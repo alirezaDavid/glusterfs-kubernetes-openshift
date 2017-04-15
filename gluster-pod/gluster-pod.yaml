@@ -2,14 +2,13 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: gluster
-  labels:
-    name: gluster
 spec:
   replicas: 2
   template:
     metadata:
+      name: gluster
       labels:
-        app: gluster
+        name: gluster
     spec:
       hostNetwork: true
       containers:
@@ -29,4 +28,4 @@ spec:
           hostPath:
             path: "/mnt/brick1"
       nodeSelector:
-        storage: glusterfs
+        gluster: yap
