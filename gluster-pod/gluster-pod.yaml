@@ -1,24 +1,32 @@
-apiVersion: v1
-kind: Pod
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
   name: gluster
   labels:
     name: gluster
 spec:
-  hostNetwork: true
-  containers:
-    - name: gluster
-      image: gluster/gluster-centos
-      ports:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: gluster
+    spec:
+      hostNetwork: true
+      containers:
         - name: gluster
-          containerPort: 24007
-      volumeMounts:
-          - name: brickpath
-            mountPath: "/mnt/brick1"
-      securityContext: 
-       capabilities: {}
-       privileged: true
-  volumes:
-    - name: brickpath
-      hostPath:
-        path: "/mnt/brick1"
+          image: gluster/gluster-centos
+          ports:
+            - name: gluster
+              containerPort: 24007
+          volumeMounts:
+              - name: brickpath
+                mountPath: "/mnt/brick1"
+          securityContext: 
+            capabilities: {}
+            privileged: true
+      volumes:
+        - name: brickpath
+          hostPath:
+            path: "/mnt/brick1"
+      nodeSelector:
+        storage: glusterfs
