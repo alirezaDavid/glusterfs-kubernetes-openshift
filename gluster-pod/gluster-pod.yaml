@@ -6,8 +6,9 @@ spec:
   replicas: 2
   template:
     metadata:
+      name: gluster
       labels:
-        app: gluster
+        name: gluster
     spec:
       hostNetwork: true
       containers:
@@ -27,4 +28,4 @@ spec:
           hostPath:
             path: "/mnt/brick1"
       nodeSelector:
-        storage: glusterfs
+        gluster: yap
